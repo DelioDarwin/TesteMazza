@@ -92,5 +92,38 @@ namespace TesteMazza.Api.Controllers
             }
         }
 
+
+        [HttpDelete]
+        [Route(template: "ExcluirEndereco/{IdEndereco:long}")]
+        public async Task<ActionResult<Endereco>> ExcluirEndereco(
+                                                              [FromServices] TesteDataContext context,
+                                                              [FromRoute] Int64 IdEndereco)
+        {
+            if (ModelState.IsValid)
+            {
+                //Exclir corpp da Historia
+                var endereco = context.Endereco.Where(c => c.IdEndereco == IdEndereco).AsEnumerable();
+
+                foreach (var x in endereco)
+                {
+                    var m = x;
+                    context.Endereco.Remove(m);
+                }
+
+                await context.SaveChangesAsync();
+
+                var enderecoRet = context.Endereco
+                    .AsNoTracking()
+                    .Where(c => c.IdEndereco == IdEndereco);
+
+                return Ok(enderecoRet);
+
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
     }
 }

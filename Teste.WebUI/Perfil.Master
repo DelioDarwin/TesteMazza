@@ -76,21 +76,8 @@
 
         <div class="container pb-5 mb-sm-3">
             <div class="row pt-5">
-                <!-- Sidebar-->
-                <div class="col-xl-3 col-lg-4">
-                    <!-- Customer picture-->
-                    <div class="gallery-item mb-grid-gutter mx-auto" href="#" style="max-width: 18.75rem;">
-                        <img src="img/FotoPerfil.jpg" runat="server" id="imgFoto" alt="">
-                        <div class="gallery-caption">
-                            <div class="gallery-indicator"><i class="gallery-indicator-icon" data-feather="refresh-ccw"></i></div>
-                            <asp:FileUpload ID="FileUpload1" Style="display: none" runat="server" onchange="upload1()" accept="image/*" />
-                            <input class="fileUpload btn btn-light" style="width: 156px" runat="server" id="btnFoto1" type="button" value="Atualizar Foto" onclick="showBrowseDialog1()" />
-                            <asp:Button runat="server" ID="btnSelecionarFoto1" Text="" Style="display: none;" OnClick="btnSelecionarFoto1_Click" />
-                        </div>
-                    </div>
-                </div>
                 <!-- Main content-->
-                <div class="col-lg-8 offset-xl-1">
+                <div class="col-lg-12 offset-xl-1">
 
                     <!-- Navigation (visible sm-up)-->
                     <ul class="nav nav-tabs d-none d-sm-flex">
@@ -130,8 +117,7 @@
 
         <footer class="pt-5 bg-dark bg-position-right-center bg-no-repeat" style="background-image: url(img/home/intro/footer-pattern.jpg);">
             <div class="py-3" style="background-color: rgba(20,20,20, .45);">
-                <div class="container font-size-xs text-center" aria-label="Copyright"><span class="text-white opacity-80 mr-1">© Todos os direitos reservados. Por</span><a class="nav-link-inline nav-link-light" href="https://time66.com.br" target="_blank">Time66</a></div>
-            </div>
+               </div>
         </footer>
 
         <!-- Back To Top Button-->
@@ -147,20 +133,6 @@
 
 
 
-        <script type="text/javascript">
-    
-             
-            function showBrowseDialog1() {
-                var fileuploadctrl = document.getElementById('<%= FileUpload1.ClientID %>');
-                fileuploadctrl.click();
-            }
-
-            function upload1() {
-                var btn = document.getElementById('<%= btnSelecionarFoto1.ClientID %>');
-                btn.click();
-            }
-
-        </script>
 
         <%--<script src="js/theme.min.js"></script>--%>
         <script src="js/vendor.min.js"></script>

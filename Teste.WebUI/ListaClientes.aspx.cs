@@ -53,6 +53,11 @@ namespace TesteMazza
                 grvCliente.DataSource = dt;
                 grvCliente.DataBind();
             }
+            else
+            {
+                grvCliente.DataSource = null;
+                grvCliente.DataBind();
+            }
 
         }
 
@@ -63,11 +68,44 @@ namespace TesteMazza
             {
                 Response.Redirect("CadCliente?IdCliente=" + e.CommandArgument.ToString());
             }
-            //else if (e.CommandName.ToString() == "Excluir")
-            //{
-            //    ExcluirAnuncio(Convert.ToInt64(e.CommandArgument.ToString()));
-            //}
+            else if (e.CommandName.ToString() == "Excluir")
+            {
+                Task<bool> retorno = ExcluirCliente(Convert.ToInt64(e.CommandArgument.ToString()));
+
+                if (retorno.IsCompleted)
+                {
+                    CarregaClientes();
+                    ShowMessage("Sucesso", "O cliente foi excluído.", Enuns.MessageType.success);
+
+                }
+            }
+        }        
+
+
+        private async Task<bool> ExcluirCliente(Int64 iIdCliente)
+        {
+            Rotas endpoint = new Rotas();
+            endpoint.sEndPoint_Cliente_ExcluirCliente += iIdCliente.ToString();
+            HttpResponseMessage result = client.DeleteAsync(endpoint.sEndPoint_Cliente_ExcluirCliente).Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+                string sRetorno = result.Content.ReadAsStringAsync().Result;
+
+            }
+            else
+            {
+                return false;
+            }
+
+            return true;
         }
+
+        public void ShowMessage(string TipoMensagem, string titulo, Enuns.MessageType type)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), System.Guid.NewGuid().ToString(), "swal('" + TipoMensagem + "','" + titulo + "','" + type + "')", true);
+        }
+
 
     }
 }

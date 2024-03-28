@@ -24,8 +24,23 @@
                 <div class="col-md-12">
                     <hr class="mt-3 pb-3">
                     <div class="text-sm-right">
+                        <button class="btn btn-info" runat="server" onserverclick="btnNovo_Click" id="btnNovo">Novo Cliente</button>
                         <button class="btn btn-success" runat="server" onserverclick="btnCadastrarCliente_Click" id="btnCadastrarCliente">Salvar Cliente</button>
                     </div>   
+                </div>
+            </div>
+
+            
+            <div class="row">
+                <!-- Customer picture-->
+                <div class="gallery-item mb-grid-gutter mx-auto" href="#" style="max-width: 18.75rem;">
+                    <img src="img/FotoPerfil.jpg" runat="server" id="imgFoto" alt="">
+                    <div class="gallery-caption">
+                        <div class="gallery-indicator"><i class="gallery-indicator-icon" data-feather="refresh-ccw"></i></div>
+                        <asp:FileUpload ID="FileUpload1" Style="display: none" runat="server" onchange="upload1()" accept="image/*" />
+                        <input class="fileUpload btn btn-light" style="width: 156px" runat="server" id="btnFoto1" type="button" value="Atualizar Foto" onclick="showBrowseDialog1()" />
+                        <asp:Button runat="server" ID="btnSelecionarFoto1" Text="" Style="display: none;" OnClick="btnSelecionarFoto1_Click" />
+                    </div>
                 </div>
             </div>
 
@@ -94,12 +109,17 @@
                     </div>
                 </div>
 
-                <hr class="mt-3 pb-3">
-                <div class="text-sm-right">
-                    <button class="btn btn-primary" runat="server" onserverclick="btnCadastrarEndereco_Click" id="btnCadastrarEndereco">Salvar Endereço</button>
-                </div>       
+              <div class="row">
+                <div class="col-md-12">
+                    <hr class="mt-3 pb-3">
+                    <div class="text-sm-right">
+                        <button class="btn btn-primary" runat="server" onserverclick="btnCadastrarEndereco_Click" id="btnCadastrarEndereco">Salvar Endereço</button>
+                    </div> 
+                </div>
+             </div>
 
             </div>
+
     <br /><br />
 
 
@@ -131,24 +151,21 @@
            </Columns>
        </asp:GridView>
        </div>
-   </div>
+       </div>
 
 
     <script type="text/javascript">
 
-        var prm = Sys.WebForms.PageRequestManager.getInstance();
-        if (prm != null) {
-            prm.add_endRequest(function (sender, e) {
-                if (sender._postBackSettings.panelsToUpdate != null) {
-                    bindcontrols();
-                }
-            });
-        };
+        function showBrowseDialog1() {
+            var fileuploadctrl = document.getElementById('<%= FileUpload1.ClientID %>');
+                fileuploadctrl.click();
+            }
 
-        function bindcontrols() {
-            $("#<%=txtCEP.ClientID%>").mask('00000-000');
-            $("#<%=txtNumero.ClientID%>").mask('000000');
-        };
+        function upload1() {
+            var btn = document.getElementById('<%= btnSelecionarFoto1.ClientID %>');
+            btn.click();
+        }
+
 
         $(document).ready(function ($) {
             $("#<%=txtCEP.ClientID%>").mask('00000-000');
@@ -157,4 +174,5 @@
 
     </script>
 
+    
 </asp:Content>

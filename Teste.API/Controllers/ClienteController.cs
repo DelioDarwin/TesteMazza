@@ -159,9 +159,57 @@ namespace TesteMazza.Api.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-            } 
-        
+            }
+
+
+        [HttpDelete]
+        [Route(template: "ExcluirCliente/{IdCliente:long}")]
+        public async Task<ActionResult<Cliente>> ExcluirCliente(
+                                                                   [FromServices] TesteDataContext context,
+                                                                   [FromRoute] Int64 IdCliente)
+        {
+            if (ModelState.IsValid)
+            {
+                //Exclir corpp da Historia
+                var endereco = context.Endereco.Where(c => c.IdCliente == IdCliente).AsEnumerable();
+
+                foreach (var x in endereco)
+                {
+                    var m = x;
+                    context.Endereco.Remove(m);
+                }
+
+                await context.SaveChangesAsync();
+
+
+
+                //Excluir Cabeçalho da História
+                var cliente = context.Cliente.Where(c => c.IdCliente == IdCliente).AsEnumerable();
+
+                foreach (var x in cliente)
+                {
+                    var m = x;
+                    context.Cliente.Remove(m);
+                }
+
+                await context.SaveChangesAsync();
+
+
+                var clienteRet = context.Cliente
+                    .AsNoTracking()
+                    .Where(c => c.IdCliente == IdCliente);
+
+                return Ok(clienteRet);
+
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
+
     }
+
+}
 

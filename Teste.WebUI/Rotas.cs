@@ -23,7 +23,9 @@ namespace TesteMazza
         public string sEndPoint_Cliente_VerificaClienteValidaEmail { get; set; }
         public string sEndPoint_Cliente_ValidaEmail { get; set; }
         public string sEndPoint_Cliente_RetornaClientePorEmail { get; set; }
+        public string sEndPoint_Cliente_ExcluirCliente { get; set; }
         
+
 
 
 
@@ -31,8 +33,11 @@ namespace TesteMazza
         public string sEndPoint_Endereco { get; set; }
         public string sEndPoint_Endereco_GetByEnderecosPorIdEndereco { get; set; }
         public string sEndPoint_Endereco_AlterarEndereco { get; set; }
+        public string sEndPoint_Endereco_ExcluirEndereco { get; set; }
 
         
+
+
         public Rotas()
         {
             //### Endpoints Cliente
@@ -41,12 +46,17 @@ namespace TesteMazza
             sEndPoint_Cliente_AlterarDados = URLApi + "v1/Clientes/AlterarDados/";
             sEndPoint_Cliente_AtualizarFoto = URLApi + "v1/Clientes/AtualizarFoto/";
             sEndPoint_Cliente_RetornaClientePorEmail = URLApi + "v1/Clientes/RetornaClientePorEmail/";
+            sEndPoint_Cliente_ExcluirCliente = URLApi + "v1/Clientes/ExcluirCliente/";
 
 
             //### Endpoints Endereco
             sEndPoint_Endereco = URLApi + "v1/enderecos";
             sEndPoint_Endereco_GetByEnderecosPorIdEndereco = URLApi + "v1/enderecos/GetByEnderecosPorIdEndereco/";
             sEndPoint_Endereco_AlterarEndereco = URLApi + "v1/enderecos/AlterarEndereco/";
+            sEndPoint_Endereco_ExcluirEndereco = URLApi + "v1/enderecos/ExcluirEndereco/";
+
+            
+
 
         }
 
