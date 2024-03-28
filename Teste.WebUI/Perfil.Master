@@ -1,0 +1,212 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Perfil.Master.cs" Inherits="TesteMazza.PerfilMaster" %>
+
+<!DOCTYPE html>
+<html5>
+
+    <head runat="server">
+        <meta charset="utf-8">
+        <title>Time66 | História e Comércio</title>
+        <!-- SEO Meta Tags-->
+        <meta name="description" content="Time66 - História e Comércio">
+        <meta name="keywords" content="relojoaria, relógios, pulso, bolso, parede, mesa, compra, venda, suiços, japoneses, alemães">
+        <meta name="author" content="Delio Darwin">
+        <!-- Viewport-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Favicon and Touch Icons-->
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="mask-icon" color="#111" href="safari-pinned-tab.svg">
+        <meta name="msapplication-TileColor" content="#111">
+        <meta name="theme-color" content="#ffffff">
+        <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+        <link rel="stylesheet" media="screen" href="css/vendor.min.css" />
+        <!-- Main Theme Styles + Bootstrap-->
+        <link rel="stylesheet" media="screen" href="css/theme.min.css" />
+        <!-- Customizer styles and scripts-->
+        <link rel="stylesheet" media="screen" href="customizer/customizer.min.css" />
+        <link href="css/Time66.css" rel="stylesheet" />
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.mask.js"></script>
+
+    </head>
+
+    <body>
+        
+        <form runat="server">
+
+        <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
+        <asp:UpdateProgress ID="updateProgress" runat="server" AssociatedUpdatePanelID="UpdatePanel">
+            <ProgressTemplate>
+                <div id="loader"></div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
+
+        <asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+
+
+        <!-- Navbar Light-->
+        <header class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+            <div class="container-fluid navbar-inner">
+                <!-- navbar brand-->
+                <a class="navbar-brand" id="logoHome" href="https://time66.com.br">
+                     <img src="img/Mazza.png" alt="Teste Mazza" width="120" />
+                 </a>
+
+                <div class="navbar-btns d-flex position-absolute order-sm-3" style="margin-top: 30px;">
+
+                    <div runat="server" id="divUsuario" style="margin-right: 10px;">
+                        <div class="circle" runat="server" id="divFoto" style="display: inline-block">
+                            <img src="#" runat="server" id="imgFotoPerfil" onerror="this.src='img/FotoPerfil.jpg';this.onerror='';">
+                        </div>
+                        <div class="btn-group dropdown" style="margin-top: -15px">
+                            <button type="button" class="dropdown-toggle" style="background-color: transparent; border: none; font-size: 12px" runat="server" id="lblUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <div class="dropdown-menu" style="margin-left: -70px; margin-top: 0px;">
+                                <a href="CadCliente.aspx" class="dropdown-item">Cliente </a>
+                            </div>
+                        </div>
+                    </div>
+
+                  </div>
+
+            </div>
+        </header>
+
+        <div class="container pb-5 mb-sm-3">
+            <div class="row pt-5">
+                <!-- Sidebar-->
+                <div class="col-xl-3 col-lg-4">
+                    <!-- Customer picture-->
+                    <div class="gallery-item mb-grid-gutter mx-auto" href="#" style="max-width: 18.75rem;">
+                        <img src="img/FotoPerfil.jpg" runat="server" id="imgFoto" alt="">
+                        <div class="gallery-caption">
+                            <div class="gallery-indicator"><i class="gallery-indicator-icon" data-feather="refresh-ccw"></i></div>
+                            <asp:FileUpload ID="FileUpload1" Style="display: none" runat="server" onchange="upload1()" accept="image/*" />
+                            <input class="fileUpload btn btn-light" style="width: 156px" runat="server" id="btnFoto1" type="button" value="Atualizar Foto" onclick="showBrowseDialog1()" />
+                            <asp:Button runat="server" ID="btnSelecionarFoto1" Text="" Style="display: none;" OnClick="btnSelecionarFoto1_Click" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Main content-->
+                <div class="col-lg-8 offset-xl-1">
+
+                    <!-- Navigation (visible sm-up)-->
+                    <ul class="nav nav-tabs d-none d-sm-flex">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" runat="server" id="lkbConfiguracoes"><i data-feather="settings"></i>&nbsp;Menu</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item active" href="CadCliente.aspx">Cadastro de Cliente</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="ListaClientes.aspx">Lista de Clientes</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Navigation (visible sm-down)APENAS NO MOBILE-->
+                    <div class="d-sm-none pb-4">
+                        <button class="btn btn-primary btn-block mb-2" type="button" data-toggle="collapse" data-target="#account-menu"><i class="mr-2" data-feather="menu"></i>Menu</button>
+                        <div class="collapse" id="account-menu">
+                            <div class="list-group">
+                                <a class="list-group-item list-group-item-action active" href="CadCliente.aspx">
+                                    <i class="mr-2" data-feather="user" style="width: 1rem; height: 1rem;"></i>Cadastro de Cliente
+                                </a>
+                                <a class="list-group-item list-group-item-action" href="ListaClientes.aspx">
+                                    <i class="mr-2" data-feather="map-pin" style="width: 1rem; height: 1rem;"></i>Lista de Clientes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <asp:ContentPlaceHolder runat="server" ID="MainContent">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+        <footer class="pt-5 bg-dark bg-position-right-center bg-no-repeat" style="background-image: url(img/home/intro/footer-pattern.jpg);">
+            <div class="py-3" style="background-color: rgba(20,20,20, .45);">
+                <div class="container font-size-xs text-center" aria-label="Copyright"><span class="text-white opacity-80 mr-1">© Todos os direitos reservados. Por</span><a class="nav-link-inline nav-link-light" href="https://time66.com.br" target="_blank">Time66</a></div>
+            </div>
+        </footer>
+
+        <!-- Back To Top Button-->
+        <a class="scroll-to-top-btn" href="#"><i class="scroll-to-top-btn-icon" data-feather="chevron-up"></i></a>
+
+        <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
+        <div class="ms-customizer-backdrop">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status"></div>
+        </div>
+
+              
+        </form>
+
+
+
+        <script type="text/javascript">
+    
+             
+            function showBrowseDialog1() {
+                var fileuploadctrl = document.getElementById('<%= FileUpload1.ClientID %>');
+                fileuploadctrl.click();
+            }
+
+            function upload1() {
+                var btn = document.getElementById('<%= btnSelecionarFoto1.ClientID %>');
+                btn.click();
+            }
+
+        </script>
+
+        <%--<script src="js/theme.min.js"></script>--%>
+        <script src="js/vendor.min.js"></script>
+        
+
+
+        <style type="text/css">
+            /* Center the loader */
+            #loader {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                z-index: 1;
+                width: 150px;
+                height: 150px;
+                margin: -75px 0 0 -75px;
+                border: 16px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 16px solid #005BAC;
+                width: 120px;
+                height: 120px;
+                -webkit-animation: spin 2s linear infinite;
+                animation: spin 2s linear infinite;
+            }
+
+            @-webkit-keyframes spin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+
+    </body>
+</html5>
+

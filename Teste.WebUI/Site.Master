@@ -1,0 +1,122 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TesteMazza.SiteMaster" %>
+
+<!DOCTYPE html>
+<html5>
+    <head runat="server">
+        <meta charset="utf-8">
+        <title>Time66 | História e Comércio</title>
+        <!-- SEO Meta Tags-->
+        <meta name="description" content="Time66 - História e Comércio">
+        <meta name="keywords" content="relojoaria, relógios, pulso, bolso, parede, mesa, compra, venda, suiços, japoneses, alemães">
+        <meta name="author" content="Delio Darwin">
+        <!-- Viewport-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Favicon and Touch Icons-->
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="mask-icon" color="#111" href="safari-pinned-tab.svg">
+        <meta name="msapplication-TileColor" content="#111">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" media="screen" href="css/vendor.min.css" />
+        <!-- Main Theme Styles + Bootstrap-->
+        <link rel="stylesheet" media="screen" href="css/theme.min.css" />
+        <!-- Customizer styles and scripts-->
+        <link rel="stylesheet" media="screen" href="customizer/customizer.min.css" />
+        <link href="css/Time66.css" rel="stylesheet" />
+        <link href="css/select2.min.css" rel="stylesheet" />
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.mask.js"></script>
+        <script src="js/select2.min.js"></script>
+
+        <link href="css/sweetalert.css" rel="stylesheet" />
+        <script src="js/sweetalert.min.js"></script>          
+
+    </head>
+    <body>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+        <form runat="server">
+            <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
+            <asp:UpdateProgress ID="updateProgress" runat="server" AssociatedUpdatePanelID="UpdatePanel">
+                <ProgressTemplate>
+                    <div id="loader"></div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
+
+            <asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+
+                    <!-- First line: Topbar-->
+                    <div class="navbar bg-dark py-2 px-0">
+                        <div class="container px-3">
+                            <!-- contact info-->
+                            <ul class="list-inline mb-0 d-none d-lg-inline-block">
+                                <li class="list-inline-item opacity-75 mr-2"><span class="text-light font-size-sm py-1 pl-0 pr-1" id="lblFraseAtendimento" runat="server">Dev: </span></li>
+                                <li class="list-inline-item opacity-75 mr-2"><i class="text-light mr-2" data-feather="mail" style="width: 13px; height: 13px;"></i><a class="text-light font-size-sm py-1 pl-0 pr-1" href="mailto:deliodarwin@gmail.com.br">deliodarwin@gmail.com.br</a></li>
+                            </ul>
+                            <!-- links collapsed (moblie)-->
+                            <div class="dropdown d-inline-block d-lg-none">
+                                <div class="dropdown-menu">
+                                   <%-- <a class="dropdown-item" href="#">Sobre nós</a><a class="dropdown-item" href="#">Central de ajuda</a><a class="dropdown-item" href="#">Informações de Entrega</a>--%>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="mailto:deliodarwin@gmail.com.br" style="font-size: 12px"><i class="mr-2" data-feather="mail" style="width: 13px; height: 13px;"></i>deliodarwin@gmail.com.br</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second line-->
+                    <header class="navbar navbar-light bg-light px-0">
+                        <div class="container flex-sm-nowrap px-3">
+                            <!-- navbar brand-->
+                            <a class="navbar-brand" id="logoHome" href="https://time66.com.br">
+                                <img src="img/Mazza.png" alt="Teste Mazza" width="120" />
+                            </a>
+                    
+                            <div class="navbar-btns d-flex position-absolute order-sm-3" style="margin-top: 30px;">
+
+                                <div runat="server" id="divUsuario" style="margin-right: 10px;">
+                                    <div class="circle" runat="server" id="divFoto" style="display: inline-block">
+                                        <img src="#" runat="server" id="imgFotoPerfil" onerror="this.src='img/FotoPerfil.jpg';this.onerror='';">
+                                    </div>
+                                    <div class="btn-group dropdown" style="margin-top: -15px">
+                                        <button type="button" class="dropdown-toggle" style="background-color: transparent; border: none; font-size: 12px" runat="server" id="lblUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                        <div class="dropdown-menu" style="margin-left: -70px; margin-top: 0px;">
+                                            <a href="CadCliente.aspx" class="dropdown-item">Cliente </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<a class="navbar-btn bg-0 my-3" href="#offcanvas-cart" data-toggle="offcanvas"><span class="d-block position-relative"><span class="navbar-btn-badge bg-primary text-light">4</span><i class="mx-auto mb-1" data-feather="shopping-cart"></i>R$ 2.325,00</span></a>-->
+                            </div>
+                        </div>
+                        
+                    </header>
+
+                    <asp:ContentPlaceHolder runat="server" ID="MainContent">
+                    </asp:ContentPlaceHolder>
+
+                    <footer class="pt-5 bg-dark bg-position-right-center bg-no-repeat" style="background-image: url(img/home/intro/footer-pattern.jpg);">
+                        <div class="container text-center pt-2">
+                           <hr class="border-light mt-5">
+                        </div>
+                        <br />
+                    </footer>
+                    <!-- Back To Top Button-->
+                    <a class="scroll-to-top-btn" href="#"><i class="scroll-to-top-btn-icon" data-feather="chevron-up"></i></a>
+                    <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
+
+                </ContentTemplate>
+            </asp:UpdatePanel>
+
+        </form>
+
+        <script src="js/vendor.min.js"></script>
+        <script src="js/theme.min.js"></script>
+
+
+
+    </body>
+</html5>
+
